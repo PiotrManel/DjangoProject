@@ -20,9 +20,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'echo "#git repository" > buildinfo.txt'
-                sh 'git branch >> buildinfo.txt'
+                sh 'git show >> buildinfo.txt'
                 sh 'echo "# jenkins" >> buildinfo.txt'
                 sh 'echo "buildurl = {$(pwd)}" >> buildinfo.txt'
+                sh 'echo "agentname = {${NODE_NAME}}" >> buildinfo.txt'
                 sh 'docker build .'
                 sh 'docker-compose up -d'
             }
