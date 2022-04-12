@@ -5,8 +5,7 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-                sh 'sudo docker-compose run web django-admin startproject composeexample .'
-                sh 'sudo chown -R $USER:$USER .'
+                sh 'docker-compose run web django-admin startproject composeexample .'
                 sh 'ls -la'
                 sh 'docker-compose up -d'
             }
