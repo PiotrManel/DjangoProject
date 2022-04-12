@@ -5,9 +5,9 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-                sh 'docker-compose run web django-admin startproject composeexample .'
+                sh 'sudo docker-compose run web django-admin startproject composeexample .'
                 sh 'ls -la'
-                sh 'docker-compose up -d'
+                sh 'sudo docker-compose up -d'
             }
         }
     }
