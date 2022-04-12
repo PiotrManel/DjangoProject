@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage ("Create build output") {
             steps {
-                writeFile file: "buildinfo.txt", text: "Build info file:"
+                writeFile file: "buildinfo.txt", text: "Build info file:\n"
                 }
             }
         stage('Deploy') {
