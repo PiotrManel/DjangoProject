@@ -18,7 +18,6 @@ pipeline {
                 sh 'echo "buildpath = {$(pwd)}" >> buildinfo.txt'
                 sh 'docker build .'
                 sh 'docker-compose up -d'
-                sh 'docker cp buildinfo.txt Diango:/'
             }
         }
 
