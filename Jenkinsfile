@@ -17,6 +17,9 @@ pipeline {
                 sh 'echo "agentname = {${NODE_NAME}}" >> buildinfo.txt'
                 sh 'echo "buildpath = {$(pwd)}" >> buildinfo.txt'
                 sh 'echo "$DBPassProd"'
+                sh 'openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
+                      -keyout ec2-35-159-53-144.eu-central-1.compute.amazonaws.com.key -out ec2-35-159-53-144.eu-central-1.compute.amazonaws.com.crt -subj "/CN=ec2-35-159-53-144.eu-central-1.compute.amazonaws.com" \
+                      -addext "subjectAltName=DNS:ec2-35-159-53-144.eu-central-1.compute.amazonaws.com,DNS:www.ec2-35-159-53-144.eu-central-1.compute.amazonaws.com,IP:35.159.53.144"'
                 sh 'docker build .'
                 sh 'docker-compose up -d'
             }
