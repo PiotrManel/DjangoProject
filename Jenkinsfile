@@ -12,21 +12,20 @@ pipeline {
         label 'Prod'
     }
     stages {
+        stage ("Create build output") {
+            steps {
+                writeFile file: "buildinfo.txt", text: "test1"
+                }
+            }
         stage('Deploy') {
             steps {
-                sh 'whoami'
-                sh 'ls -la'
+                sh 'echo "whoami" > buildinfo.txt'
+                sh 'echo "ls -la" > buildinfo.txt'
                 sh 'docker build .'
                 sh 'docker-compose up -d'
             }
         }
-        stage ("Create build output") {
-            steps {
-                sh "mkdir -p output"
-                writeFile file: "buildinfo.txt", text: "test1"
-                writeFile file: "buildinfo.txt", text: "test2"
-                }
-            }
+
         stage ("Archive build output"){
             steps {
                 archiveArtifacts artifacts: '*.txt'
