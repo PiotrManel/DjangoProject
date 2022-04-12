@@ -16,6 +16,7 @@ pipeline {
                 sh 'echo "buildurl = {35.159.53.144}" >> buildinfo.txt' // XD
                 sh 'echo "agentname = {${NODE_NAME}}" >> buildinfo.txt'
                 sh 'echo "buildpath = {$(pwd)}" >> buildinfo.txt'
+                sh 'echo "$DBPassProd"'
                 sh 'docker build .'
                 sh 'docker-compose up -d'
             }
