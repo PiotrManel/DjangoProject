@@ -1,10 +1,10 @@
 node {
     stage ("Create build output") {
         sh "mkdir -p output"
-        writeFile file: "output/buildinfo.txt", text: "This file is useful, need to archive it."
+        writeFile file: "buildinfo.txt", text: "Build Archive"
     }
     stage ("Archive build output"){
-    archiveArtifacts artifacts: 'output/*.txt'
+    archiveArtifacts artifacts: '*.txt'
     }
 }
 pipeline {
@@ -23,12 +23,13 @@ pipeline {
         stage ("Create build output") {
             steps {
                 sh "mkdir -p output"
-                writeFile file: "output/buildinfo.txt", text: "This file is useful, need to archive it."
+                writeFile file: "buildinfo.txt", text: "test1"
+                writeFile file: "buildinfo.txt", text: "test2"
                 }
             }
         stage ("Archive build output"){
             steps {
-                archiveArtifacts artifacts: 'output/*.txt'
+                archiveArtifacts artifacts: '*.txt'
                 }
             }
         }
