@@ -16,6 +16,7 @@ pipeline {
             steps {
                 sh 'whoami'
                 sh 'ls -la'
+                sh 'docker build .'
                 sh 'docker-compose up -d'
             }
         }
