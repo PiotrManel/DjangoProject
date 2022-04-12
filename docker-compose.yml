@@ -1,50 +1,25 @@
-version: '3'
+version: "3.9"
 
 services:
-  web:
-    restart: always
-    build: .
-    expose:
-      - "8000"
-    links:
-      - postgres:postgres
-      - redis:redis
+  db:
+    image: postgres
     volumes:
-      - web-django:/usr/src/app
-      - web-static:/usr/src/app/static
-    env_file: .env
+      - ./data/db:/var/lib/postgresql/data
     environment:
-      DEBUG: 'true'
-    command: /usr/local/bin/gunicorn docker_django.wsgi:application -w 2 -b :8000
-
-  nginx:
-    restart: always
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
     build: .
-    ports:
-      - "80:80"
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - web-static:/www/static
-    links:
-      - web:web
-
-  postgres:
-    restart: always
-    image: postgres:latest
+      - .:/code
     ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data/
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
 
-  redis:
-    restart: always
-    image: redis:latest
-    ports:
-      - "6379:6379"
-    volumes:
-      - redisdata:/data
-
-volumes:
-  web-django:
-  web-static:
-  pgdata:
-  redisdata:
