@@ -19,8 +19,8 @@ pipeline {
             }
         stage('Deploy') {
             steps {
-                sh 'echo "whoami" > buildinfo.txt'
-                sh 'echo "ls -la" > buildinfo.txt'
+                sh 'whoami >> buildinfo.txt'
+                sh 'ls -la >> buildinfo.txt'
                 sh 'docker build .'
                 sh 'docker-compose up -d'
             }
