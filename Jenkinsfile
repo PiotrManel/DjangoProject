@@ -1,12 +1,3 @@
-node {
-    stage ("Create build output") {
-        sh "mkdir -p output"
-        writeFile file: "buildinfo.txt", text: "Build Archive"
-    }
-    stage ("Archive build output"){
-    archiveArtifacts artifacts: '*.txt'
-    }
-}
 pipeline {
     agent{
         label 'Prod'
@@ -14,18 +5,20 @@ pipeline {
     stages {
         stage ("Create build output") {
             steps {
-                writeFile file: "buildinfo.txt", text: "test1"
+                writeFile file: "buildinfo.txt", text: "Build info file:"
                 }
             }
         stage('Deploy') {
             steps {
-                sh 'echo "#git repository" > buildinfo.txt'
+                sh 'echo "#git repository" >> buildinfo.txt'
                 sh 'git show >> buildinfo.txt'
                 sh 'echo "# jenkins" >> buildinfo.txt'
-                sh 'echo "buildurl = {$(pwd)}" >> buildinfo.txt'
+                sh 'echo "buildurl = {35.159.53.144}" >> buildinfo.txt' // XD
                 sh 'echo "agentname = {${NODE_NAME}}" >> buildinfo.txt'
+                sh 'echo "buildpath = {$(pwd)}" >> buildinfo.txt'
                 sh 'docker build .'
                 sh 'docker-compose up -d'
+                sh 'cp buildinfo.txt Diango:/'
             }
         }
 
