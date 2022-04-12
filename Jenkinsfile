@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-                docker-compose up -d
+                sh 'docker-compose up -d'
             }
         }
     }
@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-                docker-compose up -d
+                sh 'docker-compose up -d'
             }
         }
     }
@@ -23,7 +23,7 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-                docker-compose up -d
+                sh 'docker-compose up -d'
             }
         }
     }
