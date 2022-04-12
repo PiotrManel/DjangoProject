@@ -1,25 +1,5 @@
-// pipeline {
-//     agent all
-//     stages {
-//         stage('Deploy') {
-//             steps {
-//                 sh 'docker-compose up -d'
-//             }
-//         }
-//     }
-// }
 pipeline {
-    agent dev
-    stages {
-        stage('Deploy') {
-            steps {
-                sh 'docker-compose up -d'
-            }
-        }
-    }
-}
-pipeline {
-    agent Prod
+    agent any
     stages {
         stage('Deploy') {
             steps {
