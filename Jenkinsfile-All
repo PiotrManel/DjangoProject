@@ -16,7 +16,7 @@ pipeline {
                 sh 'echo "buildurl = {35.159.53.144, 18.198.1.1}" >> buildinfo.txt' // XD
                 sh 'echo "agentname = {${NODE_NAME}}" >> buildinfo.txt'
                 sh 'echo "buildpath = {$(pwd)}" >> buildinfo.txt'
-                sh 'openssl x509 -req -sha256 -days 365 -in server.csr -signkey cert.key -out cert.crt'
+                sh 'openssl x509 -req -sha256 -days 365 -signkey cert.key -out cert.crt'
                 sh 'docker build .'
                 sh 'docker-compose up -d'
                 sh 'docker cp  cert.crt proxy:/etc/nginx/'
