@@ -14,7 +14,8 @@ services:
     build: .
     container_name: Diango
     restart: always
-    command: python manage.py runserver 0.0.0.0:8000
+    #command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn composeexample.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/code
       - /var/run/docker.sock:/var/run/docker.sock
