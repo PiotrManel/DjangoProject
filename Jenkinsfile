@@ -20,9 +20,9 @@ pipeline {
                       -keyout ec2-35-159-53-144.eu-central-1.compute.amazonaws.com.key -out ec2-35-159-53-144.eu-central-1.compute.amazonaws.com.crt -subj "/CN=ec2-35-159-53-144.eu-central-1.compute.amazonaws.com" \
                       -addext "subjectAltName=DNS:ec2-35-159-53-144.eu-central-1.compute.amazonaws.com,DNS:www.ec2-35-159-53-144.eu-central-1.compute.amazonaws.com,IP:35.159.53.144"'
                 sh 'docker build .'
+                sh 'docker-compose up -d'
                 sh 'docker cp  ec2-35-159-53-144.eu-central-1.compute.amazonaws.com.crt proxy:/etc/nginx/'
                 sh 'docker cp  ec2-35-159-53-144.eu-central-1.compute.amazonaws.com.key proxy:/etc/nginx/'
-                sh 'docker-compose up -d'
             }
         }
 
