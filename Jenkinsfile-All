@@ -16,7 +16,7 @@ pipeline {
                 sh 'echo "buildurl = {35.159.53.144, 18.198.1.1}" >> buildinfo.txt' // XD
                 sh 'echo "agentname = {${NODE_NAME}}" >> buildinfo.txt'
                 sh 'echo "buildpath = {$(pwd)}" >> buildinfo.txt'
-                sh 'openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365'
+                sh 'openssl req -x509 -newkey rsa:4096 -nodes -keyout key.pem -out cert.pem -sha256 -days 365'
                 sh 'openssl pkey -in key.pem -out cert.key'
                 sh 'openssl crl2pkcs7 -nocrl -certfile cert.pem | openssl pkcs7 -print_certs -out cert.crt'
                 sh 'docker build .'
