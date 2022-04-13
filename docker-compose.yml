@@ -9,7 +9,7 @@ services:
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=$DBPassProd
+      - POSTGRES_PASSWORD=postgres
   web:
     build: .
     container_name: Diango
@@ -24,7 +24,7 @@ services:
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=$DBPassProd
+      - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
 
