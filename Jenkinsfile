@@ -33,7 +33,7 @@ pipeline {
             }
         }
     }
-}
+
 pipeline {
     agent{
             label 'dev'
