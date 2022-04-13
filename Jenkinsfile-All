@@ -1,6 +1,6 @@
 pipeline {
     agent{
-        label ('Prod' && 'dev
+        label ('Prod' && 'dev')
     }
     stages {
         stage ("Create build output") {
